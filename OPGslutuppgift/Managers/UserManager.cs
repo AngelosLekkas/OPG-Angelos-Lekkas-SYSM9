@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OPGslutuppgift.Managers
 {
@@ -17,14 +18,14 @@ namespace OPGslutuppgift.Managers
 
         private ObservableCollection<User> _users;
 
-        public ObservableCollection<User> Users
+        public ObservableCollection<User> Users //skapar user list
         {
             get { return _users; }
         }
 
 
-        private User? _currentUser; //hjälpvariabel current user
-        public User? CurrentUser 
+        private User? _currentUser; 
+        public User? CurrentUser //sätter nuvarande user till currentuser.
         {
             get { return _currentUser; }
             set
@@ -40,7 +41,7 @@ namespace OPGslutuppgift.Managers
             CreateDefaultUsers();
         }
 
-        private void CreateDefaultUsers() //skapar default users
+        private void CreateDefaultUsers() //skapar default users med username & password.
         {
             Users.Add(new User
             {
@@ -57,20 +58,42 @@ namespace OPGslutuppgift.Managers
 
         public bool Login(string username, string password)
         {
-            //jämföra username & password med users från listan,
+            //jämför username & password input med users från listan
             //om username & password finns ->
-            //sätt currentUser till user.
+            
 
-            foreach (User u in Users)
+            foreach (User user in Users)
             {
-                if (u.Username == username && u.Password == password)
+                if (user.Username == username && user.Password == password)
                 {
-                    CurrentUser = u;
+                    CurrentUser = user; //sätt currentUser till user.
                     return true;
                 }
             }
             return false;
         }
+
+        public void Register(string username, string password, string country) //register metod med parameter som krävs för new user
+        {
+            Users.Add(new User //skapar new user i users list
+            {
+                Username = username,
+                Password = password,  //sätter props till inskickade parametrar
+                Country = country
+            });
+        }
+
+        public void FindUser(string username) //metod för att se om username redan existerar i users list.
+        {
+            foreach (User user in Users) //går igenom listan
+            {
+                if (user.Username.Equals(username)) //om username redan finns
+                {
+                    MessageBox.Show("Username already exists."); //felmeddelande
+                }
+            }
+        }
+            
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
