@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OPGslutuppgift.Models
 {
-    public class AdminUser : User
+    public class AdminUser : User //ärver från User klassen
     {
         public AdminUser (string Username, string Password, string Country) : base(Username, Password, Country) { } //konstruktor från User
 
