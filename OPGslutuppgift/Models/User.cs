@@ -13,6 +13,8 @@ namespace OPGslutuppgift.Models
         public string Password { get; set; }
         public string Country { get; set; }
 
+        
+
 
         //metoder
         public void ValidateLogin() //validerar att password stämmer överens.

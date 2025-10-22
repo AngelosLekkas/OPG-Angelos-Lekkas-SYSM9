@@ -43,16 +43,18 @@ namespace OPGslutuppgift.Managers
 
         private void CreateDefaultUsers() //skapar default users med username & password.
         {
-            Users.Add(new User
+            Users.Add(new AdminUser
             {
                 Username = "Admin",
-                Password = "1234"
+                Password = "1234",
+             
             });
 
             Users.Add(new User
             {
                 Username = "User",
-                Password = "1234"
+                Password = "1234",
+               
             });
         }
 
@@ -90,6 +92,7 @@ namespace OPGslutuppgift.Managers
                 if (user.Username.Equals(username)) //om username redan finns
                 {
                     MessageBox.Show("Username already exists."); //felmeddelande
+                    break;
                 }
             }
         }
