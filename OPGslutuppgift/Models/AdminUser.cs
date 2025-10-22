@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace OPGslutuppgift.Models
 {
-    internal class AdminUser
+    public class AdminUser : User
     {
+        public AdminUser (string Username, string Password, string Country) : base(Username, Password, Country) { } //konstruktor från User
+
+        public void RemoveAnyRecipe(Recipe recipe, RecipeManager manager) //metod för adminUser att ta bort recept.
+        {
+            manager.
+        }
     }
 }

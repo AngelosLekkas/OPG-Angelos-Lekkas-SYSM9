@@ -22,5 +22,20 @@ namespace OPGslutuppgift.Models
         }
 
         //metoder
+        public virtual bool ValidateLogin(string inputPassword) //validerar att password stämmer överens.
+        {
+            return Password == inputPassword;
+        }
+
+        public virtual void ChangePassword(string newPassword) //sätter Password till newPassword input.
+        {
+            Password = newPassword;
+        }
+
+        public void UpdateDetails(string newUsername, string newCountry) //sätter username och country till nya inputs.
+        {
+            Username = newUsername;
+            Country = newCountry;
+        }
     }
 }
