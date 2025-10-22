@@ -8,7 +8,6 @@ namespace OPGslutuppgift.Models
 {
     public class AdminUser : User //ärver från User klassen
     {
-        public AdminUser (string Username, string Password, string Country) : base(Username, Password, Country) { } //konstruktor från User
 
         public void RemoveAnyRecipe() //metod för adminUser att ta bort recept.
         {

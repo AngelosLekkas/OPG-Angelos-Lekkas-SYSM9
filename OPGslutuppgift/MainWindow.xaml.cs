@@ -32,6 +32,8 @@ namespace OPGslutuppgift
 
             //sätta datacontext till viewmodellen
             DataContext = viewModel;
+
+            
         }
     }
 }
