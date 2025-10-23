@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+            <Label Content="COOKMASTER" FontSize="60" Margin="50"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Username" FontSize="20" Margin="100,0,0,0"/>
+                <Label Content="Password" FontSize="20" Margin="100,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Username, Mode=TwoWay}" Margin="100,0,0,0" Width="100"/>
+                <TextBox Text="{Binding Password, Mode=TwoWay}" Margin="100,0,0,0" Width="100"/>
+            </StackPanel>
+
+            <Button Content="Logga in" Command="{Binding LoginCommand}" Width="50"/>
+        </StackPanel>
         
     </Grid>
 </Window>

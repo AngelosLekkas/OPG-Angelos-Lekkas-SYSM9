@@ -1,4 +1,5 @@
-﻿namespace MVVM_KlonaMIg.MVVM
+﻿using System.Windows.Input;
+namespace MVVM_KlonaMIg.MVVM
 {
     public class RelayCommand : ICommand
     {
