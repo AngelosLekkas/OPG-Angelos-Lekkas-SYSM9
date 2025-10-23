@@ -58,7 +58,7 @@ namespace OPGslutuppgift.Managers
             });
         }
 
-        public bool Login(string username, string password)
+        public bool ValidateLogin(string username, string password)
         {
             //jämför username & password input med users från listan
             //om username & password finns ->
