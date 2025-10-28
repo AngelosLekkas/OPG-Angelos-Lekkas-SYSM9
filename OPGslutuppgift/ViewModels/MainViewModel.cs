@@ -1,6 +1,7 @@
 ﻿using MVVM_KlonaMIg.MVVM;
 using OPGslutuppgift.Managers;
 using OPGslutuppgift.MVVM;
+using OPGslutuppgift.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,16 +18,20 @@ namespace OPGslutuppgift.ViewModels
     {
         //skapa usermanager prop
         public UserManager UserManager { get; }
+        public ICommand LoginCommand { get; }
 
-
+        public ICommand OpenRegisterCommand { get; }
 
         //hämta usermanager via konstruktorn
         public MainViewModel(UserManager userManager)
         {
             UserManager = userManager;
-            LoginCommand = new RelayCommand(execute => Login());
-        }
 
+            LoginCommand = new RelayCommand(execute => Login());
+            OpenRegisterCommand = new RelayCommand(execute => OpenRegisterWindow());
+
+        }
+        //MainViewModel props för {Binding}
         private string? _username;
         public string? Username 
         {  
@@ -41,16 +46,9 @@ namespace OPGslutuppgift.ViewModels
             set { _password = value; OnPropertyChanged(); }
         }
 
-        //private string? _country;
-        //public string? Country
-        //{
-        //    get { return _country; }
-        //    set { _country = value; OnPropertyChanged(); }
-        //}
 
-        public ICommand LoginCommand { get; }
-
-        private void Login()
+        //metoder
+        private void Login() //Login metod som körs när login knappen klickas
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
@@ -58,16 +56,44 @@ namespace OPGslutuppgift.ViewModels
                 return;
             }
 
-            bool success = UserManager.ValidateLogin(Username, Password);
+            bool success = UserManager.ValidateLogin(Username, Password); 
 
-            if (success)
+            if (success) //om true
             {
-                MessageBox.Show($"Välkommen {Username}!");
-                
+                MessageBox.Show($"Välkommen {Username}!"); //welcome message
+                RecipeListWindow recipeListWindow = new RecipeListWindow(); //skapa recipelistWindow
+                recipeListWindow.Show(); //öppna recipelistWindow
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is MainWindow)
+                    {
+                        window.Close(); //stäng mainWindow
+                        break;
+                    }
+                }
+
             }
-            else
+            else //annars (false)
             {
                 MessageBox.Show("Fel användarnamn eller lösenord.");
+            }
+        }
+
+        private void OpenRegisterWindow() //metod som ska bindas till RegisterCommand för att öppna RegisterWindow
+        {
+            //öppna RegisterWindow
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+
+            //stäng MainWindow
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow)
+                {
+                    window.Close();
+                    break;
+                }
             }
         }
 

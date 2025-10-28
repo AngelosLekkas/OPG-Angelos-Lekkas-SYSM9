@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace OPGslutuppgift.Models
 {
-    internal class Recipe
+    public class Recipe
     {
+        public string Title { get; set; }
+        public string Ingredients { get; set; }
+        public string Instructions { get; set; }
+        public string Category { get; set; }
+        public string Date { get; set; }
+        public string Author { get; set; }
     }
 }

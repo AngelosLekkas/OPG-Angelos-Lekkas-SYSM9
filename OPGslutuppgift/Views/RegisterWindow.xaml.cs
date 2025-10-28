@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OPGslutuppgift.Managers;
+using OPGslutuppgift.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,14 @@ namespace OPGslutuppgift.Views
         public RegisterWindow()
         {
             InitializeComponent();
+            //hämta usermanager 
+            UserManager userManager = (UserManager)Application.Current.Resources["UserManager"];
+
+            //skapa instans av viewmodel
+            RegisterViewModel viewModel = new RegisterViewModel(userManager);
+
+            //sätta datacontext till viewmodellen
+            DataContext = viewModel;
         }
     }
 }
