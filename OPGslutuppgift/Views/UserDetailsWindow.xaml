@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="UserDetailsWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <TextBlock Text="User Details" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Current Username:" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding CurrentUsername}" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
+
+            <TextBlock Text="Current Country:" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding CurrentCountry}" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
+
+            <TextBlock Text="New Username:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding NewUsername}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
+
+            <TextBlock Text="New Password:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding NewPassword, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
+
+            <TextBlock Text="Confirm Password:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
+
+            <TextBlock Text="Choose new country:" HorizontalAlignment="Center"/>
+            <ComboBox SelectedItem="{Binding NewCountry}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100">
+                <ComboBoxItem Content="Sweden"/>
+                <ComboBoxItem Content="Norway"/>
+                <ComboBoxItem Content="Denmark"/>
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Save" Command="{Binding SaveCommand}" Width="80"/>
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Width="80"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

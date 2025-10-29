@@ -22,7 +22,7 @@ namespace OPGslutuppgift.ViewModels
 
 
         private Recipe? _selectedRecipe;
-        public Recipe? SelectedRecipe
+        public Recipe? SelectedRecipe 
         {
             get { return _selectedRecipe; }
             set { _selectedRecipe = value; OnPropertyChanged(); }
@@ -45,10 +45,11 @@ namespace OPGslutuppgift.ViewModels
             UserManager = userManager;
 
             
-            Recipes = new ObservableCollection<Recipe> //skapar två default recept
+            Recipes = new ObservableCollection<Recipe> //skapar tre default recept
             {
                 new Recipe { Title="Pasta", Category="Italienskt", Author=userManager.CurrentUser.Username },
-                new Recipe { Title="Tacos", Category="Mexikanskt", Author=userManager.CurrentUser.Username }
+                new Recipe { Title="Tacos", Category="Mexikanskt", Author=userManager.CurrentUser.Username },
+                new Recipe { Title="Köttbullar", Category="Svenskt", Author=userManager.CurrentUser.Username }
             };
 
             //bindar commands till metoder
@@ -89,7 +90,7 @@ namespace OPGslutuppgift.ViewModels
             MessageBox.Show($"Detaljer för {SelectedRecipe.Title}");
         }
 
-        private void SignOut() //metod för att logga ut user (Sign Out knappen)
+        private void SignOut() //metod för att logga ut user/returnera till mainWindow (Sign Out knappen)
         {
             
             MainWindow mainWindow = new MainWindow();
@@ -109,7 +110,7 @@ namespace OPGslutuppgift.ViewModels
             UserDetailsWindow userDetails = new UserDetailsWindow();
             userDetails.ShowDialog();
         }
-        private void ShowInfo()//metod för att visa info
+        private void ShowInfo()//metod för att visa info om programmet
         {
             MessageBox.Show(
                 "CookMaster är en digital receptbok.\n\nHär kan du skapa, visa och hantera dina favoritrecept! \n\nUtvecklad av Angelos Lekkas, 2025. ",

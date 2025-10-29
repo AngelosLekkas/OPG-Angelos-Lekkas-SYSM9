@@ -47,14 +47,14 @@ namespace OPGslutuppgift.Managers
             {
                 Username = "Admin",
                 Password = "1234",
-             
+                Country = "Sweden"
             });
 
             Users.Add(new User //user
             {
                 Username = "User",
                 Password = "1234",
-               
+                Country = "Sweden"
             });
         }
 

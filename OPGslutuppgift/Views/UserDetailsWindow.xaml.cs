@@ -24,7 +24,7 @@ namespace OPGslutuppgift.Views
         public UserDetailsWindow()
         {
             InitializeComponent();
-            //hämta usermanager 
+            ////hämta usermanager 
             UserManager userManager = (UserManager)Application.Current.Resources["UserManager"];
 
             //skapa instans av viewmodel
