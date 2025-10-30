@@ -12,7 +12,7 @@ namespace OPGslutuppgift.Models
         public string Ingredients { get; set; }
         public string Instructions { get; set; }
         public string Category { get; set; }
-        public string Date { get; set; }
-        public string Author { get; set; }
+        public DateTime Date { get; set; }
+        public User Author { get; set; }
     }
 }

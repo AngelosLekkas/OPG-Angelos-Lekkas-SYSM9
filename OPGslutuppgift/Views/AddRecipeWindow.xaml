@@ -6,7 +6,29 @@
         xmlns:local="clr-namespace:OPGslutuppgift.Views"
         mc:Ignorable="d"
         Title="AddRecipeWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock Text="Add Recipes" FontSize="22" 
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Title:"/>
+            <TextBox Text="{Binding Title, Mode=TwoWay}" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Category:"/>
+            <TextBox Text="{Binding Category, Mode=TwoWay}" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Ingredients:"/>
+            <TextBox Text="{Binding Ingredients, Mode=TwoWay}" Height="60" 
+                     TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Instructions:"/>
+            <TextBox Text="{Binding Instructions, Mode=TwoWay}" Height="80"
+                     TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Save" Command="{Binding RecipeSaveCommand}" Width="80" Margin="5,0"/>
+                <Button Content="Cancel" Command="{Binding RecipeCancelCommand}" Width="80" Margin="5,0"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OPGslutuppgift.Managers;
+using OPGslutuppgift.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,13 @@ namespace OPGslutuppgift.Views
         public AddRecipeWindow()
         {
             InitializeComponent();
+            //hämta usermanager 
+            UserManager userManager = (UserManager)Application.Current.Resources["UserManager"];
+            //hämta recipemanager
+            RecipeManager recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"];
+
+            //sätt datacontext
+            DataContext = new AddRecipeViewModel(userManager, recipeManager);
         }
     }
 }

@@ -10,7 +10,7 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Inloggad som: " FontWeight="Bold" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding CurrentUsername}" Margin="5,0" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ShowCurrentUsername}" Margin="5,0" VerticalAlignment="Center"/>
                 <Button Content="User" Command="{Binding UserCommand}" Margin="10,0"/>
                 <Button Content="Info" Command="{Binding InfoCommand}" Margin="5,0"/>
             </StackPanel>

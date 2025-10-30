@@ -26,12 +26,11 @@ namespace OPGslutuppgift.Views
             InitializeComponent();
             //hämta usermanager 
             UserManager userManager = (UserManager)Application.Current.Resources["UserManager"];
+            //hämta recipemanager
+            RecipeManager recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"];
 
-            //skapa instans av viewmodel
-            RecipeListViewModel viewModel = new RecipeListViewModel(userManager);
-
-            //sätta datacontext till viewmodellen
-            DataContext = viewModel;
+            //sätt datacontext
+            DataContext = new RecipeListViewModel(userManager, recipeManager);
         }
     }
 }

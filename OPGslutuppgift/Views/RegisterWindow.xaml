@@ -18,10 +18,8 @@
             <Label Content="Password:" FontSize="20" Margin="0,0,0,5" HorizontalAlignment="Center"/>
             <TextBox Text="{Binding Password, Mode=TwoWay}" Width="200"/>
             <Label Content="Country:" FontSize="20" Margin="0,0,0,5" HorizontalAlignment="Center"/>
-            <ComboBox SelectedValue="{Binding Country, Mode=TwoWay}" Width="200">
-                <ComboBoxItem Content="Sweden"/>
-                <ComboBoxItem Content="Norway"/>
-                <ComboBoxItem Content="Denmark"/>
+            <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Country, Mode=TwoWay}" Width="200">
+                
             </ComboBox>
 
             <Button Content="Register" Command="{Binding RegisterCommand}" Width="80" Margin="20"/>

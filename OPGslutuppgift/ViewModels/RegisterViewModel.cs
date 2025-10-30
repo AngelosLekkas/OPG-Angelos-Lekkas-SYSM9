@@ -47,6 +47,13 @@ namespace OPGslutuppgift.ViewModels
             set { _country = value; OnPropertyChanged(); }
         }
 
+        public List<string> Countries { get; } = new List<string> //public lista med countries (för combobox)
+        {
+         "Sverige",
+         "Norge",
+         "Danmark"
+        };
+
         //metoder
         private void Register() //metod som körs när register knappen klickas
         {

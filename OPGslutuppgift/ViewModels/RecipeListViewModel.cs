@@ -18,6 +18,7 @@ namespace OPGslutuppgift.ViewModels
     {
         //props
         public UserManager UserManager { get; }
+        public RecipeManager RecipeManager { get; }
         public ObservableCollection<Recipe> Recipes { get; set; }
 
 
@@ -27,10 +28,11 @@ namespace OPGslutuppgift.ViewModels
             get { return _selectedRecipe; }
             set { _selectedRecipe = value; OnPropertyChanged(); }
         }
-        public string CurrentUsername
+        public string ShowCurrentUsername
         {
             get { return UserManager.CurrentUser.Username; }
         }
+
         //commands
         public ICommand AddRecipeCommand { get; }
         public ICommand RemoveRecipeCommand { get; }
@@ -40,19 +42,22 @@ namespace OPGslutuppgift.ViewModels
         public ICommand InfoCommand { get; }
 
         //konstruktor
-        public RecipeListViewModel(UserManager userManager)
+        public RecipeListViewModel(UserManager userManager, RecipeManager recipeManager)
         {
             UserManager = userManager;
+            RecipeManager = recipeManager;
 
-            
-            Recipes = new ObservableCollection<Recipe> //skapar tre default recept
+            if (UserManager.CurrentUser is AdminUser) //om currentuser är adminuser
             {
-                new Recipe { Title="Pasta", Category="Italienskt", Author=userManager.CurrentUser.Username },
-                new Recipe { Title="Tacos", Category="Mexikanskt", Author=userManager.CurrentUser.Username },
-                new Recipe { Title="Köttbullar", Category="Svenskt", Author=userManager.CurrentUser.Username }
-            };
+                Recipes = RecipeManager.GetAllRecipes(); //hämta alla recept
+            }
+            else
+            {
+                Recipes = RecipeManager.GetByUser(UserManager.CurrentUser); //annars bara currentusers
+            }
 
-            //bindar commands till metoder
+
+            //bindar commands till metoder för buttons
             AddRecipeCommand = new RelayCommand(execute => AddRecipe());
             RemoveRecipeCommand = new RelayCommand(execute => RemoveRecipe());
             DetailsCommand = new RelayCommand(execute => ShowDetails());
@@ -64,7 +69,26 @@ namespace OPGslutuppgift.ViewModels
         //metoder
         private void AddRecipe() //metod som körs när man klickar på add knappen.
         {
-            MessageBox.Show("AddRecipe window ska öppnas");
+            AddRecipeWindow addRecipeWindow = new AddRecipeWindow(); 
+            addRecipeWindow.ShowDialog(); //öppnar addRecipeWindow
+
+            RefreshRecipes(); //visar recept i RecipeList efter add.
+        }
+
+        private void RefreshRecipes() //metod för att uppdatera recipe list
+        {
+            if (UserManager.CurrentUser is AdminUser) //om currentuser är adminuser
+            {
+                Recipes = RecipeManager.Recipes; //hämta alla recept
+            }
+            else
+            {
+                var mine = RecipeManager.Recipes
+                    .Where(r => r.Author == UserManager.CurrentUser); //annars bara currentusers
+                Recipes = new ObservableCollection<Recipe>(mine); 
+            }
+
+            OnPropertyChanged(nameof(Recipes));
         }
 
         private void RemoveRecipe() //metod som körs när man klickar på remove button.
@@ -76,7 +100,7 @@ namespace OPGslutuppgift.ViewModels
             }
 
             MessageBox.Show($"{SelectedRecipe.Title} receptet har tagits bort."); //skriver ut vilket recept som tas bort
-            Recipes.Remove(SelectedRecipe); //tar bort recept
+            RecipeManager.RemoveRecipe(SelectedRecipe); //tar bort recept (anropar recipemanager remove metod)
         }
 
         private void ShowDetails() //metod för att visa recipe details (när man klickar på details knappen)

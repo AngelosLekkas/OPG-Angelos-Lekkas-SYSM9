@@ -7,5 +7,7 @@
     <Application.Resources>
         <!-- global usermanager-instans tillgänglig för hela applikationen -->
         <managers:UserManager x:Key="UserManager"/>
+        <!-- global recipemanager-instans tillgänglig för hela applikationen -->
+        <managers:RecipeManager x:Key="RecipeManager"/>
     </Application.Resources>
 </Application>

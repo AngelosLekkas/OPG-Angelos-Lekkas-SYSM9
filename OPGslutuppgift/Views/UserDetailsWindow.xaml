@@ -26,10 +26,8 @@
             <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100"/>
 
             <TextBlock Text="Choose new country:" HorizontalAlignment="Center"/>
-            <ComboBox SelectedItem="{Binding NewCountry}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100">
-                <ComboBoxItem Content="Sweden"/>
-                <ComboBoxItem Content="Norway"/>
-                <ComboBoxItem Content="Denmark"/>
+            <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding NewCountry, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Center" Width="100">
+               
             </ComboBox>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
