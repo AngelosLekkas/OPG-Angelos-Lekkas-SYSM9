@@ -25,6 +25,7 @@ namespace OPGslutuppgift.ViewModels
             RegisterCommand = new RelayCommand (execute => Register());
         }
 
+
         //RegisterViewModel props för {Binding}
         private string? _username;
         public string? Username
@@ -40,6 +41,14 @@ namespace OPGslutuppgift.ViewModels
             set { _password = value; OnPropertyChanged(); }
         }
 
+        private string? _confirmPassword;
+        public string? ConfirmPassword //prop för att bekräfta password vid reg (VG)
+        {
+            get { return _confirmPassword; }
+            set { _confirmPassword = value; OnPropertyChanged(); }
+        }
+
+
         private string? _country;
         public string? Country
         {
@@ -54,10 +63,14 @@ namespace OPGslutuppgift.ViewModels
          "Danmark"
         };
 
+
         //metoder
-        private void Register() //metod som körs när register knappen klickas
+        private void Register() //metod som körs när register knappen klickas (kontroll av pw krav)
         {
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Country))
+            if (string.IsNullOrWhiteSpace(Username) || 
+                string.IsNullOrWhiteSpace(Password) ||
+                string.IsNullOrWhiteSpace(ConfirmPassword) || 
+                string.IsNullOrWhiteSpace(Country))
             {
                 MessageBox.Show("Du måste fylla i alla fält!");
                 return;
@@ -68,7 +81,53 @@ namespace OPGslutuppgift.ViewModels
                 MessageBox.Show("Username already in use.");
                 return;
             }
-             
+
+            if (Password != ConfirmPassword) //kollar så password == confirmpw (VG)
+            {
+                MessageBox.Show("Lösenorden matchar inte!");
+                return;
+            }
+
+
+            if (Password.Length < 8) //kontroll av password length (VG)
+            {
+                MessageBox.Show("Lösenordet måste vara minst 8 tecken långt.");
+                return;
+            }
+
+            bool hasNbr = false; //variabel för kontroll av siffra i password (VG)
+
+            foreach(char c in Password) //går igenom varje char i password
+            {
+                if (char.IsDigit(c)) //om char = siffra
+                {
+                    hasNbr = true; //true
+                    break;
+                }
+            }
+            if (!hasNbr) //om password inte har siffra
+            {
+                MessageBox.Show("Lösenordet måste innehålla minst en siffra!");
+                return;
+            }
+
+            bool hasSpecialChar = false; //variabel för kontroll av specialtecken i pw (VG)
+
+            foreach (char c in Password)
+            {
+                if (!char.IsLetterOrDigit(c)) //om char inte är bokstav eller siffra
+                {
+                    hasSpecialChar = true; //true (har specialtecken)
+                    break;
+                }
+            }
+
+            if (!hasSpecialChar)
+            {
+                MessageBox.Show("Lösenordet måste innehålla minst ett Specialtecken!");
+                return;
+            }
+
 
             UserManager.Register(Username, Password, Country); //kör register metoden från usermanager för att lägga till user i listan.
             MessageBox.Show("Användare skapad!");

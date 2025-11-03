@@ -7,17 +7,16 @@
         mc:Ignorable="d"
         Title="RegisterWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
         <StackPanel>
-            <Label Content="REGISTER" FontSize="40" HorizontalAlignment="Center" Margin="0,20,0,20"/>
-            <Label Content="Username:" FontSize="20" Margin="0,0,0,5" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay}" Width="200"/>
-            <Label Content="Password:" FontSize="20" Margin="0,0,0,5" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay}" Width="200"/>
-            <Label Content="Country:" FontSize="20" Margin="0,0,0,5" HorizontalAlignment="Center"/>
+            <Label Content="Register" FontSize="28" HorizontalAlignment="Center" Margin="0,20,0,20" FontWeight="Bold"/>
+            
+            <Label Content="Username:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
+            <Label Content="Password:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
+            <Label Content="Confirm Password:" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
+            <Label Content="Country:" HorizontalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding Country, Mode=TwoWay}" Width="200">
                 
             </ComboBox>
