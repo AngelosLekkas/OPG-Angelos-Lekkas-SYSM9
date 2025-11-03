@@ -40,18 +40,18 @@ namespace OPGslutuppgift.ViewModels
 
 
         //metoder
-        private void SaveRecipe()
+        private void SaveRecipe() //metod för save knapp
         {
             if (string.IsNullOrWhiteSpace(Title) ||
                 string.IsNullOrWhiteSpace(Category) ||
                 string.IsNullOrWhiteSpace(Ingredients) ||
                 string.IsNullOrWhiteSpace(Instructions))
             {
-                MessageBox.Show("Alla fält måste fyllas i!");
+                MessageBox.Show("Alla fält måste fyllas i!"); //om fält = tomt, felmedd
                 return;
             }
 
-            var newRecipe = new Recipe
+            var newRecipe = new Recipe //variabel för nytt recept
             {
                 Title = Title,
                 Category = Category,
@@ -61,13 +61,13 @@ namespace OPGslutuppgift.ViewModels
                 Author = UserManager.CurrentUser
             };
 
-            RecipeManager.AddRecipe(newRecipe);
+            RecipeManager.AddRecipe(newRecipe); //lägger till recept i listan (via RecipeManager)
             MessageBox.Show($"Receptet {Title} har lagts till!");
 
             CloseWindow();
         }
 
-        private void CloseWindow()
+        private void CloseWindow() //metod för stänga AddRecipeWindow
         {
             foreach (Window window in Application.Current.Windows)
             {
