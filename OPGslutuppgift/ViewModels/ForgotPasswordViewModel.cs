@@ -77,17 +77,31 @@ namespace OPGslutuppgift.ViewModels
 
         private void ResetPassword()
         {
-            if (SecurityAnswer != _foundUser.SecurityAnswer) //om svar är fel
+            if (_foundUser == null) //om ingen user hittas
             {
-                MessageBox.Show("Fel svar på säkerhetsfrågan"); //felmedd
+                MessageBox.Show("Kontrollera om User finns - klicka på 'Find User'!");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(NewPassword)) //måste fylla i nytt pw
+            if (string.IsNullOrWhiteSpace(SecurityAnswer)) //om svar = tomt
             {
-                MessageBox.Show("Fyll i nytt lösenord.");
+                MessageBox.Show("Du måste svara på säkerhetsfrågan!");
                 return;
             }
+
+            if (SecurityAnswer != _foundUser.SecurityAnswer) //om svar = fel
+            {
+                MessageBox.Show("Fel svar!");
+                return;
+            }
+
+
+            if (string.IsNullOrWhiteSpace(NewPassword)) //nytt pw får ej va null
+            {
+                MessageBox.Show("Fyll i ett nytt lösenord.");
+                return;
+            }
+
 
             _foundUser.Password = NewPassword; //sätt pw till newPw
             MessageBox.Show("Lösenordet har uppdaterats!");
