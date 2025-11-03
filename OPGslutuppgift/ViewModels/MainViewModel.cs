@@ -18,9 +18,13 @@ namespace OPGslutuppgift.ViewModels
     {
         //skapa usermanager prop
         public UserManager UserManager { get; }
+
+        //commands
         public ICommand LoginCommand { get; }
 
         public ICommand OpenRegisterCommand { get; }
+
+        public ICommand ForgotPasswordCommand { get; }
 
         //hämta usermanager via konstruktorn
         public MainViewModel(UserManager userManager)
@@ -29,6 +33,7 @@ namespace OPGslutuppgift.ViewModels
 
             LoginCommand = new RelayCommand(execute => Login());
             OpenRegisterCommand = new RelayCommand(execute => OpenRegisterWindow());
+            ForgotPasswordCommand = new RelayCommand(execute => OpenForgotPasswordWindow());
 
         }
         //MainViewModel props för {Binding}
@@ -95,6 +100,12 @@ namespace OPGslutuppgift.ViewModels
                     break;
                 }
             }
+        }
+
+        private void OpenForgotPasswordWindow() //metod som öppnar forgotPW window
+        {
+            ForgotPasswordWindow forgotPasswordWindow = new ForgotPasswordWindow();
+            forgotPasswordWindow.ShowDialog();
         }
 
     }

@@ -12,24 +12,25 @@ namespace OPGslutuppgift.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Country { get; set; }
+        public string SecurityQuestion { get; set; }
+        public string SecurityAnswer { get; set; }
 
-        
 
 
         //metoder
-        public void ValidateLogin() //validerar att password stämmer överens.
-        {
+        //public void ValidateLogin() //validerar att password stämmer överens.
+        //{
             
-        }
+        //}
 
-        public void ChangePassword() //sätter Password till newPassword input.
-        {
+        //public void ChangePassword() //sätter Password till newPassword input.
+        //{
             
-        }
+        //}
 
-        public void UpdateDetails() //sätter username och country till nya inputs.
-        {
+        //public void UpdateDetails() //sätter username och country till nya inputs.
+        //{
 
-        }
+        //}
     }
 }

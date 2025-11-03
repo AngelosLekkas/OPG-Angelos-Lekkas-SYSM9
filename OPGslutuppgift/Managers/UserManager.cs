@@ -16,6 +16,8 @@ namespace OPGslutuppgift.Managers
         //hantera nuvarande user (CurrentUser)
         //hantera login, register, findUser, changePassword & CurrentUser (metoder)
 
+
+        //props
         private ObservableCollection<User> _users;
 
         public ObservableCollection<User> Users //skapar user list
@@ -35,26 +37,33 @@ namespace OPGslutuppgift.Managers
             }
         }
 
+        //konstruktor
         public UserManager()
         {
             _users = new ObservableCollection<User>(); //initierar user list
             CreateDefaultUsers();
         }
 
+
+        //metoder
         private void CreateDefaultUsers() //skapar default users med username & password.
         {
             Users.Add(new AdminUser //adminuser
             {
-                Username = "Admin",
-                Password = "1234",
-                Country = "Sweden"
+                Username = "admin",
+                Password = "password",
+                Country = "Sweden",
+                SecurityQuestion = "Vad heter din lärare i OPG?",
+                SecurityAnswer = "hassan"
             });
 
             Users.Add(new User //user
             {
-                Username = "User",
-                Password = "1234",
-                Country = "Sweden"
+                Username = "user",
+                Password = "password",
+                Country = "Sweden",
+                SecurityQuestion = "Vad heter din lärare i OPG?",
+                SecurityAnswer = "hassan"
             });
         }
 
@@ -96,6 +105,18 @@ namespace OPGslutuppgift.Managers
                 }
             }
             return false;
+        }
+
+        public User? FindUserByUsername(string username) //metod för hitta user (VG) (anropas i ForgotPasswordViewModel)
+        {
+            foreach(User user in Users) //sök igenom user list
+            {
+                if(user.Username.Equals(username, StringComparison.OrdinalIgnoreCase)) //om username finns
+                {
+                    return user; //returnera user
+                }
+            }
+            return null;
         }
             
 
