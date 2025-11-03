@@ -40,7 +40,7 @@ namespace OPGslutuppgift.Managers
             OnPropertyChanged(nameof(Recipes));
         }
 
-        public ObservableCollection<Recipe> GetAllRecipes() //metod för att hämta alla recept (adminUser)
+        public ObservableCollection<Recipe> GetAllRecipes() //metod för att hämta alla recept
         {
             return Recipes;
         }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OPGslutuppgift.Managers;
+using OPGslutuppgift.Models;
+using OPGslutuppgift.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +20,17 @@ namespace OPGslutuppgift.Views
     /// <summary>
     /// Interaction logic for RecipeDetalWindow.xaml
     /// </summary>
-    public partial class RecipeDetalWindow : Window
+    public partial class RecipeDetailWindow : Window
     {
-        public RecipeDetalWindow()
+        public RecipeDetailWindow(Recipe selectedRecipe, RecipeManager recipeManager)
         {
             InitializeComponent();
+
+            // skapa instans av viewmodel
+            RecipeDetailViewModel viewModel = new RecipeDetailViewModel(selectedRecipe, recipeManager);
+
+            // sätt datacontext
+            DataContext = viewModel;
         }
     }
 }

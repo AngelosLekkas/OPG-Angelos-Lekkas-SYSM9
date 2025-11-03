@@ -19,6 +19,8 @@ namespace OPGslutuppgift.ViewModels
         //props
         public UserManager UserManager { get; }
         public RecipeManager RecipeManager { get; }
+
+        private ObservableCollection<Recipe> _recipes;
         public ObservableCollection<Recipe> Recipes { get; set; }
 
 
@@ -75,7 +77,7 @@ namespace OPGslutuppgift.ViewModels
             RefreshRecipes(); //visar recept i RecipeList efter add.
         }
 
-        private void RefreshRecipes() //metod för att uppdatera recipe list
+        private void RefreshRecipes() //metod för att uppdatera recipe list (efter add)
         {
             if (UserManager.CurrentUser is AdminUser) //om currentuser är adminuser
             {
@@ -83,9 +85,9 @@ namespace OPGslutuppgift.ViewModels
             }
             else
             {
-                var mine = RecipeManager.Recipes
-                    .Where(r => r.Author == UserManager.CurrentUser); //annars bara currentusers
-                Recipes = new ObservableCollection<Recipe>(mine); 
+                var userRecipes = RecipeManager.Recipes
+                    .Where(recipe => recipe.Author == UserManager.CurrentUser); //annars bara currentusers
+                Recipes = new ObservableCollection<Recipe>(userRecipes);
             }
 
             OnPropertyChanged(nameof(Recipes));
@@ -111,7 +113,8 @@ namespace OPGslutuppgift.ViewModels
                 return;
             }
 
-            MessageBox.Show($"Detaljer för {SelectedRecipe.Title}");
+            RecipeDetailWindow detailsWindow = new RecipeDetailWindow(SelectedRecipe, RecipeManager);
+            detailsWindow.ShowDialog();
         }
 
         private void SignOut() //metod för att logga ut user/returnera till mainWindow (Sign Out knappen)
