@@ -35,6 +35,52 @@ namespace OPGslutuppgift.ViewModels
             get { return UserManager.CurrentUser.Username; }
         }
 
+
+        private string _searchText; //prop för filter funktion (VG)
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        private string _selectedCategory; //prop för filter funktion (VG)
+        public string SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        private DateTime? _selectedDate; //prop för filter funktion (VG)
+        public DateTime? SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        public List<string> Categories { get; } = new List<string> //lista med kategorier för filter (VG)
+        {
+         "Alla",
+         "Middag",
+         "Lunch",
+         "Frukost",
+         "Dessert"
+        };
+
         //commands
         public ICommand AddRecipeCommand { get; }
         public ICommand RemoveRecipeCommand { get; }

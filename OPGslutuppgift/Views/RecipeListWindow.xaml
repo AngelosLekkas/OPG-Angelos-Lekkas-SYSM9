@@ -18,7 +18,7 @@
                 <Button Content="Info" Command="{Binding InfoCommand}" Margin="0,0,0,0"/>
             </StackPanel>
             
-            <TextBlock Text="Recipes" FontSize="28" HorizontalAlignment="Center" Margin="0,20,0,20" FontWeight="Bold"/>
+            <TextBlock Text="Recipes" FontSize="28" HorizontalAlignment="Center" FontWeight="Bold"/>
 
             <ListBox ItemsSource="{Binding Recipes}"
                      SelectedItem="{Binding SelectedRecipe}"
