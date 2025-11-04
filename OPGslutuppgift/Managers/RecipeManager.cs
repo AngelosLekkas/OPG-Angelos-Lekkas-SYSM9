@@ -62,10 +62,10 @@ namespace OPGslutuppgift.Managers
         //}
 
 
-        public ObservableCollection<Recipe> Filter(string criteria) //metod för att filtrera recept baserat på titel eller kategori
-        {
-            return null;
-        }
+        //public ObservableCollection<Recipe> Filter(string criteria) //metod för att filtrera recept baserat på titel eller kategori
+        //{
+        //    return null;
+        //}
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

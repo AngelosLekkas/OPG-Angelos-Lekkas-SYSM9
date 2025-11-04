@@ -44,7 +44,7 @@ namespace OPGslutuppgift.ViewModels
             {
                 _searchText = value;
                 OnPropertyChanged();
-
+                FilterRecipes(); //anropar filter metod när searchtext ändras
             }
         }
 
@@ -56,7 +56,7 @@ namespace OPGslutuppgift.ViewModels
             {
                 _selectedCategory = value;
                 OnPropertyChanged();
-
+                FilterRecipes(); //anropar filter metod när category ändras
             }
         }
 
@@ -68,7 +68,19 @@ namespace OPGslutuppgift.ViewModels
             {
                 _selectedDate = value;
                 OnPropertyChanged();
+                FilterRecipes(); //anropar filter metod när date ändras
+            }
+        }
 
+        private string _sortOrder; //prop för filter funktion (VG)
+        public string SortOrder
+        {
+            get { return _sortOrder; }
+            set
+            {
+                _sortOrder = value;
+                OnPropertyChanged();
+                FilterRecipes(); //anropar filter metod när sortorder ändras
             }
         }
 
@@ -80,6 +92,15 @@ namespace OPGslutuppgift.ViewModels
          "Frukost",
          "Dessert"
         };
+
+
+        public List<string> SortOrders { get; } = new List<string> //lista med alt för sortering (VG)
+        {
+            "Ingen sortering",
+            "Senaste",
+            "Äldsta"
+        };
+
 
         //commands
         public ICommand AddRecipeCommand { get; }
@@ -190,6 +211,74 @@ namespace OPGslutuppgift.ViewModels
             MessageBox.Show(
                 "CookMaster är en digital receptbok.\n\nHär kan du skapa, visa och hantera dina favoritrecept! \n\nUtvecklad av Angelos Lekkas, 2025. ",
                 "Om CookMaster");
+        }
+
+        private void FilterRecipes() //filter metod för att apply filter (VG)
+        {
+            ObservableCollection<Recipe> filteredRecipes;
+            if(UserManager.CurrentUser is AdminUser) //om currentuser är admin
+            {
+                filteredRecipes = RecipeManager.GetAllRecipes(); //hämta alla recept
+            }
+
+            else
+            {
+                filteredRecipes = RecipeManager.GetByUser(UserManager.CurrentUser); //annars bara currentusers
+            }
+
+            List<Recipe> filterResult = new List<Recipe>(); //tom lista för filtrerade recept
+
+            foreach(Recipe recipe in filteredRecipes)
+            {
+                bool matchingRecipe = true; //bool för kontroll av matchande recipe
+
+                if (!string.IsNullOrWhiteSpace(SearchText))
+                {
+                    if(!recipe.Title.Contains(SearchText) && !recipe.Category.Contains(SearchText)) //om searchtext inte finns (title/category)
+                    {
+                        matchingRecipe = false;
+                    }
+                }
+
+                if (matchingRecipe == true && !string.IsNullOrWhiteSpace(SelectedCategory)) //om category är vald
+                {
+                    if (SelectedCategory != "Alla") //om vald category != alla
+                    {
+                        if(recipe.Category != SelectedCategory) //om recipe category inte är samma som vald category
+                        {
+                            matchingRecipe = false;
+                        }
+                    }
+                }
+
+                if(matchingRecipe == true && SelectedDate != null) //om datum valts
+                {
+                    if(recipe.Date.Date != SelectedDate.Value.Date) //om recipe date inte matchar vald date
+                    {
+                        matchingRecipe = false;
+                    }
+                }
+
+                if(matchingRecipe == true) //om ALLA filters matchar recipe
+                {
+                    filterResult.Add(recipe); //lägg till recipe i filterlistan
+                }
+            }
+
+            if(SortOrder == "Senaste")
+            {
+                filterResult.Sort((a, b) => b.Date.CompareTo(a.Date)); //sort från senaste till äldsta
+            }
+
+            else if (SortOrder == "Äldsta")
+            {
+                filterResult.Sort((a, b) => a.Date.CompareTo(b.Date)); //sort från äldsta till senaste
+            }
+
+            Recipes = new ObservableCollection<Recipe>(filterResult); //lägger in recipes i filterlistan
+
+            OnPropertyChanged(nameof(Recipes)); //uppdaterar recipelist i view
+
         }
     }
 }
