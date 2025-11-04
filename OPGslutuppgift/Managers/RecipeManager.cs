@@ -56,9 +56,10 @@ namespace OPGslutuppgift.Managers
             return list;
         }
 
-        public void UpdateRecipe(Recipe recipe) //metod för att uppdatera recept (edit)
-        {
-        }
+        //public void UpdateRecipe(Recipe recipe) //metod för att uppdatera recept (edit)
+        //{
+        //    OnPropertyChanged(nameof(Recipes));
+        //}
 
 
         public ObservableCollection<Recipe> Filter(string criteria) //metod för att filtrera recept baserat på titel eller kategori

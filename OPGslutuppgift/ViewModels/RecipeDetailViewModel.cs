@@ -70,7 +70,7 @@ namespace OPGslutuppgift.ViewModels
                 return;
             }
 
-            RecipeManager.UpdateRecipe(SelectedRecipe); //anropar update metod i RecipeManager (sparar ändringar)
+            //RecipeManager.UpdateRecipe(SelectedRecipe); //anropar update metod i RecipeManager (sparar ändringar)
             MessageBox.Show($"Receptet för {SelectedRecipe.Title} har uppdaterats"); //medd om success
 
             IsReadOnly = true; //sätter textboxar till readonly igen

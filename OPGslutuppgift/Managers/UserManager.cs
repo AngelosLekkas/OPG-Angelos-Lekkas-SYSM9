@@ -48,22 +48,52 @@ namespace OPGslutuppgift.Managers
         //metoder
         private void CreateDefaultUsers() //skapar default users med username & password.
         {
-            Users.Add(new AdminUser //adminuser
+            var admin = new AdminUser //admin
             {
                 Username = "admin",
                 Password = "password",
                 Country = "Sweden",
                 SecurityQuestion = "Vad heter din lärare i OPG?",
                 SecurityAnswer = "hassan"
-            });
+            };
 
-            Users.Add(new User //user
+            Users.Add(admin);
+
+            var user = new User //user
             {
                 Username = "user",
                 Password = "password",
                 Country = "Sweden",
                 SecurityQuestion = "Vad heter din lärare i OPG?",
                 SecurityAnswer = "hassan"
+            };
+            Users.Add(user);
+
+
+            //lägger till 2 default recept för user (admin kommer också kunna se, då admin ser alla recept)?
+            Application.Current.Dispatcher.Invoke(() => 
+            {
+                var recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"]; //hämtar recipemanager
+
+                recipeManager.AddRecipe(new Recipe 
+                {
+                    Title = "Pasta Bolognese",
+                    Category = "Middag",
+                    Ingredients = "Pasta, köttfärs, tomat",
+                    Instructions = "Koka pasta, koka sås, blanda.",
+                    Date = DateTime.Now,
+                    Author = user
+                });
+
+                recipeManager.AddRecipe(new Recipe
+                {
+                    Title = "Chokladkaka",
+                    Category = "Dessert",
+                    Ingredients = "Smör, socker, kakao, ägg, mjöl",
+                    Instructions = "Blanda, grädda 20 min.",
+                    Date = DateTime.Now,
+                    Author = user
+                });
             });
         }
 
@@ -111,7 +141,7 @@ namespace OPGslutuppgift.Managers
         {
             foreach(User user in Users) //sök igenom user list
             {
-                if(user.Username.Equals(username, StringComparison.OrdinalIgnoreCase)) //om username finns
+                if(user.Username.Equals(username, StringComparison.OrdinalIgnoreCase)) //om user med samma username finns
                 {
                     return user; //returnera user
                 }

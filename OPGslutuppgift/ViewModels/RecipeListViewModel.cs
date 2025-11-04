@@ -149,6 +149,8 @@ namespace OPGslutuppgift.ViewModels
 
             MessageBox.Show($"{SelectedRecipe.Title} receptet har tagits bort."); //skriver ut vilket recept som tas bort
             RecipeManager.RemoveRecipe(SelectedRecipe); //tar bort recept (anropar recipemanager remove metod)
+
+            RefreshRecipes(); //uppdaterar recipe list efter remove
         }
 
         private void ShowDetails() //metod för att visa recipe details (när man klickar på details knappen)
