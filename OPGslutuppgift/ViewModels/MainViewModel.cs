@@ -19,6 +19,22 @@ namespace OPGslutuppgift.ViewModels
         //skapa usermanager prop
         public UserManager UserManager { get; }
 
+        //MainViewModel props för {Binding}
+        private string? _username;
+        public string? Username
+        {
+            get { return _username; }
+            set { _username = value; OnPropertyChanged(); }
+        }
+
+        private string? _password;
+        public string? Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(); }
+        }
+
+
         //commands
         public ICommand LoginCommand { get; }
 
@@ -36,21 +52,6 @@ namespace OPGslutuppgift.ViewModels
             ForgotPasswordCommand = new RelayCommand(execute => OpenForgotPasswordWindow());
 
         }
-        //MainViewModel props för {Binding}
-        private string? _username;
-        public string? Username 
-        {  
-            get { return _username; } 
-            set {_username = value; OnPropertyChanged(); }
-        }
-
-        private string? _password;
-        public string? Password
-        {
-            get { return _password; }
-            set { _password = value; OnPropertyChanged(); }
-        }
-
 
         //metoder
         private void Login() //Login metod som körs när login knappen klickas
@@ -65,21 +66,33 @@ namespace OPGslutuppgift.ViewModels
 
             if (success) //om true
             {
-                MessageBox.Show($"Välkommen {Username}!"); //welcome message
-                RecipeListWindow recipeListWindow = new RecipeListWindow(); //skapa recipelistWindow
-                recipeListWindow.Show(); //öppna recipelistWindow
+                Random random = new Random();
+                string code = random.Next(100000, 999999).ToString(); //generera random 6siffrig kod
 
-                foreach (Window window in Application.Current.Windows)
+                TwoFactorWindow twoFactor = new TwoFactorWindow(code); //skapa 2fa window med koden
+                twoFactor.ShowDialog(); //öppna 2fawindow
+
+                if(twoFactor.DialogResult == true) //om 2fa lyckas
                 {
-                    if (window is MainWindow)
+                    MessageBox.Show($"Välkommen {Username}!"); //welcome msg
+                    RecipeListWindow recipeListWindow = new RecipeListWindow(); //skapa recipelistWindow
+                    recipeListWindow.Show(); //öppna recipelistWindow
+
+                    foreach (Window window in Application.Current.Windows)
                     {
-                        window.Close(); //stäng mainWindow
-                        break;
+                        if (window is MainWindow)
+                        {
+                            window.Close(); //stäng mainWindow
+                            break;
+                        }
                     }
                 }
-
+                else //om 2fa misslyckas
+                {
+                    MessageBox.Show("Verifiering misslyckades."); //felmedd
+                }
             }
-            else //annars (false)
+            else //annars (invalid input)
             {
                 MessageBox.Show("Fel användarnamn eller lösenord.");
             }

@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="TwoFactorWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Verification code was sent to your email."
+                       FontSize="16" TextAlignment="Center" Margin="0,0,0,10"/>
+
+            <TextBlock Text="{Binding DisplayedCode}" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       TextAlignment="Center" 
+                       Foreground="DarkGreen" Margin="0,0,0,15"/>
+
+            <TextBlock Text="Enter verification code:"/>
+            <TextBox Text="{Binding EnteredCode}" Width="150" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+
+            <Button Content="Verify" 
+                    Command="{Binding VerifyCommand}" 
+                    Width="120" 
+                    HorizontalAlignment="Center" Margin="0,15,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
