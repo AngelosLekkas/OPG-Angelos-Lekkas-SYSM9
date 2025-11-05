@@ -2,6 +2,7 @@
 using OPGslutuppgift.Managers;
 using OPGslutuppgift.Models;
 using OPGslutuppgift.MVVM;
+using OPGslutuppgift.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,30 @@ namespace OPGslutuppgift.ViewModels
 
             RecipeManager.AddRecipe(newRecipe); //lägger till recept i listan (via RecipeManager)
             MessageBox.Show($"Receptet {Title} har lagts till!");
+
+
+            foreach(Window window in Application.Current.Windows) //hitta öppet recipelistWindow
+            {
+                if(window is RecipeListWindow recipeListWindow) 
+                {
+                    //hämta viewmodel från RecipeListWindow
+                    var viewmodel = recipeListWindow.DataContext as RecipeListViewModel;
+                    if(viewmodel != null)
+                    {
+                        if(UserManager.CurrentUser is AdminUser) //om admin, hämta alla recipes
+                        {
+                            viewmodel.Recipes = RecipeManager.GetAllRecipes();
+                        }
+                        else
+                        {
+                            viewmodel.Recipes = RecipeManager.GetByUser(UserManager.CurrentUser);//annars bara currentusers
+                        }
+
+                        viewmodel.OnPropertyChanged(nameof(viewmodel.Recipes)); //uppdatera UI
+                    }
+                    break;
+                }
+            }
 
             CloseWindow();
         }

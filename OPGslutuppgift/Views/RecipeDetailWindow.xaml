@@ -35,6 +35,7 @@
                 <Button Content="Edit" Command="{Binding EditCommand}" Width="80" Margin="5" IsEnabled="{Binding IsEditEnabled}"/>
                 <Button Content="Save" Command="{Binding SaveCommand}" Width="80" Margin="5"/>
                 <Button Content="Cancel" Command="{Binding CancelCommand}" Width="80" Margin="5"/>
+                <Button Content="Copy"   Command="{Binding CopyCommand}"   Width="80" Margin="5"/>
             </StackPanel>
         </StackPanel>
     </Grid>

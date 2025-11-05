@@ -39,6 +39,7 @@ namespace OPGslutuppgift.ViewModels
         public ICommand EditCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand CopyCommand { get; }
 
         //konstruktor
         public RecipeDetailViewModel(Recipe selectedRecipe, RecipeManager recipeManager)
@@ -49,6 +50,7 @@ namespace OPGslutuppgift.ViewModels
             EditCommand = new RelayCommand(execute => ToggleEdit());
             SaveCommand = new RelayCommand(execute => SaveChanges());
             CancelCommand = new RelayCommand(execute => CloseWindow());
+            CopyCommand = new RelayCommand(execute => CopyRecipe());
         }
 
 
@@ -89,6 +91,27 @@ namespace OPGslutuppgift.ViewModels
                     break;
                 }
             }
+        }
+
+        private void CopyRecipe() //metod för copy knapp
+        {
+            //addwindow ska öppnas upp med ifyllda fält från selectedrecipe
+
+
+            AddRecipeWindow addWindow = new AddRecipeWindow();
+
+            var vm = addWindow.DataContext as AddRecipeViewModel;
+
+            if (vm != null) //om vm ej null
+            {
+                //sätter fälten i vm till selectedrecipes värden
+                vm.Title = SelectedRecipe.Title + " (Copy)"; // + "(copy)" för att se skillnad
+                vm.Category = SelectedRecipe.Category;
+                vm.Ingredients = SelectedRecipe.Ingredients;
+                vm.Instructions = SelectedRecipe.Instructions;
+            }
+
+            addWindow.ShowDialog();
         }
     }
 }
