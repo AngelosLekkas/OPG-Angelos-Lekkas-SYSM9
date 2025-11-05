@@ -56,6 +56,29 @@ namespace OPGslutuppgift.Managers
             return list;
         }
 
+        public void DefaultRecipesNewUser(User user) //metod för att lägga till default recept för alla newUsers (inte bara admin, user)
+        {
+            AddRecipe(new Recipe
+            {
+                Title = "Pasta Bolognese",
+                Category = "Middag",
+                Ingredients = "Pasta, köttfärs, tomatsås",
+                Instructions = "Koka pastan, laga såsen, blanda allt.",
+                Date = DateTime.Now,
+                Author = user
+            });
+
+            AddRecipe(new Recipe
+            {
+                Title = "Chokladkaka",
+                Category = "Dessert",
+                Ingredients = "Smör, socker, kakao, ägg, mjöl",
+                Instructions = "Blanda och grädda i 20 minuter.",
+                Date = DateTime.Now,
+                Author = user
+            });
+        }
+
         //public void UpdateRecipe(Recipe recipe) //metod för att uppdatera recept (edit)
         //{
         //    OnPropertyChanged(nameof(Recipes));

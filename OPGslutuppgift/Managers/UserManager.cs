@@ -116,12 +116,19 @@ namespace OPGslutuppgift.Managers
 
         public void Register(string username, string password, string country) //register metod med parameter som krävs för new user
         {
-            Users.Add(new User //skapar new user i users list
+            var newUser = new User //skapar new user i users list
             {
                 Username = username,
                 Password = password,  //sätter props till inskickade parametrar
-                Country = country
-            });
+                Country = country,
+                SecurityQuestion = "Vad heter din lärare i OPG?", //lägger till för att nya users också ska ha säkerhetsfråga & svar
+                SecurityAnswer = "hassan"
+            };
+            Users.Add(newUser);
+
+            RecipeManager recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"]; //hämtar recipemanager
+
+            recipeManager.DefaultRecipesNewUser(newUser); //anropar metod för att lägga till default recept för newuser
         }
 
         public bool FindUser(string username) //metod för att se om username redan existerar i users list.
@@ -148,8 +155,6 @@ namespace OPGslutuppgift.Managers
             }
             return null;
         }
-            
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
