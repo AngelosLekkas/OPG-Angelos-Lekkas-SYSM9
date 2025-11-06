@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGslutuppgift.Views"
         mc:Ignorable="d"
-        Title="UserDetailsWindow" Height="450" Width="800">
+        Title="UserDetailsWindow" Height="450" Width="350">
     <Grid>
         <StackPanel>
             <TextBlock Text="User Details" FontSize="28" HorizontalAlignment="Center" FontWeight="Bold"/>

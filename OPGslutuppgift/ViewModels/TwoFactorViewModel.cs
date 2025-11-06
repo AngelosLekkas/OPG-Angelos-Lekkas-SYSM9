@@ -13,7 +13,7 @@ namespace OPGslutuppgift.ViewModels
     public class TwoFactorViewModel : ViewModelBase
     {
         //props för {binding}
-        public string GeneratedCode { get; set; } // prop för random kod
+        public string GeneratedCode { get; set; } // prop för random kod (kod som ska anges)
         public string DisplayedCode { get; set; } // prop för displaya koden
         public string EnteredCode { get; set; }   // users inputkod
 

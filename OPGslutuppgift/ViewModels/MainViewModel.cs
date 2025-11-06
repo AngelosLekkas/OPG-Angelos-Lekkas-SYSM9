@@ -69,7 +69,7 @@ namespace OPGslutuppgift.ViewModels
                 Random random = new Random();
                 string code = random.Next(100000, 999999).ToString(); //generera random 6siffrig kod
 
-                TwoFactorWindow twoFactor = new TwoFactorWindow(code); //skapa 2fa window med koden
+                TwoFactorWindow twoFactor = new TwoFactorWindow(code); //skapa 2fa window (skickar in genererade koden)
                 twoFactor.ShowDialog(); //öppna 2fawindow
 
                 if(twoFactor.DialogResult == true) //om 2fa lyckas
@@ -92,7 +92,7 @@ namespace OPGslutuppgift.ViewModels
                     MessageBox.Show("Verifiering misslyckades."); //felmedd
                 }
             }
-            else //annars (invalid input)
+            else //annars (fel vid inlogg)
             {
                 MessageBox.Show("Fel användarnamn eller lösenord.");
             }

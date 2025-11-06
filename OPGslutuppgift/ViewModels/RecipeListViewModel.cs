@@ -234,7 +234,8 @@ namespace OPGslutuppgift.ViewModels
 
                 if (!string.IsNullOrWhiteSpace(SearchText))
                 {
-                    if(!recipe.Title.Contains(SearchText) && !recipe.Category.Contains(SearchText)) //om searchtext inte finns (title/category)
+
+                    if (!recipe.Title.Contains(SearchText) && !recipe.Category.Contains(SearchText)) //om searchtext inte finns (title/category)
                     {
                         matchingRecipe = false;
                     }
@@ -250,7 +251,7 @@ namespace OPGslutuppgift.ViewModels
                         }
                     }
                 }
-
+                //om ovan stämmer men selected date != recipe date
                 if(matchingRecipe == true && SelectedDate != null) //om datum valts
                 {
                     if(recipe.Date.Date != SelectedDate.Value.Date) //om recipe date inte matchar vald date
