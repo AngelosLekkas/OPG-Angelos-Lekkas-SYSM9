@@ -26,7 +26,7 @@ namespace OPGslutuppgift.ViewModels
         }
 
 
-        //RegisterViewModel props för {Binding}
+        //props för {Binding}
         private string? _username;
         public string? Username
         {

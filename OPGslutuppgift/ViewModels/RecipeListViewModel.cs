@@ -234,8 +234,11 @@ namespace OPGslutuppgift.ViewModels
 
                 if (!string.IsNullOrWhiteSpace(SearchText))
                 {
+                    string searchLower = SearchText.ToLower(); //gör sökningen case insensitive
+                    string titleLower = recipe.Title.ToLower();
+                    string categoryLower = recipe.Category.ToLower();
 
-                    if (!recipe.Title.Contains(SearchText) && !recipe.Category.Contains(SearchText)) //om searchtext inte finns (title/category)
+                    if (!titleLower.Contains(searchLower) && !categoryLower.Contains(searchLower)) //om searchtext inte finns (title/category)
                     {
                         matchingRecipe = false;
                     }

@@ -126,9 +126,6 @@ namespace OPGslutuppgift.Managers
             };
             Users.Add(newUser);
 
-            //RecipeManager recipeManager = (RecipeManager)Application.Current.Resources["RecipeManager"]; //hämtar recipemanager
-
-            //recipeManager.DefaultRecipesNewUser(newUser); //anropar metod för att lägga till default recept för newuser
         }
 
         public bool FindUser(string username) //metod för att se om username redan existerar i users list.

@@ -14,7 +14,7 @@ namespace OPGslutuppgift.ViewModels
 {
     public class UserDetailsViewModel : ViewModelBase
     {
-        //props
+        //props för {binding}
         public UserManager UserManager { get; }
 
         private string _newUsername;
